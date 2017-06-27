@@ -5,8 +5,8 @@ CC=gcc
 CXX=g++
 RM=rm -f
 
-CPPFLAGS = -std=c++11 -g -O3 $(shell pkg-config --cflags NetworKit)
-LDFLAGS  = -g -O3
+CPPFLAGS = -std=c++11 -Wall -g -O3 $(shell pkg-config --cflags NetworKit)
+LDFLAGS  = -g -O3 -Wall
 LDLIBS   = $(shell pkg-config --libs NetworKit) -fopenmp
 
 SRCS := $(shell find $(SRC_DIRS) -name *.cpp -or -name *.c -or -name *.s)
