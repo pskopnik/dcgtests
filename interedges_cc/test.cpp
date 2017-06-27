@@ -32,8 +32,8 @@ void run(unsigned int k, unsigned int kOverL, double hhc) {
 		inter = 0;
 
 		for (auto clusterIt = clusters.cbegin(); clusterIt != clusters.cend(); ++clusterIt) {
-			for (auto it = clusterIt.cbegin(); it != clusterIt.cend(); ++it) {
-				for (auto postIt = it + 1; postIt != clusterIt.cend(); ++postIt) {
+			for (auto it = (*clusterIt).cbegin(); it != (*clusterIt).cend(); ++it) {
+				for (auto postIt = it + 1; postIt != (*clusterIt).cend(); ++postIt) {
 					if (m.get(*it, *postIt) == 1) {
 						++intra;
 					} else {
