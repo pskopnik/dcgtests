@@ -1,6 +1,10 @@
 #ifndef INTEREDGES_CC_H_
 #define INTEREDGES_CC_H_
 
+#ifndef NO_OF_TIMESTEPS
+#define NO_OF_TIMESTEPS 5000
+#endif /* NO_OF_TIMESTEPS */
+
 /**
  * Tests the fraction of inter-edges in all connected components.
  *
@@ -11,7 +15,7 @@
  * Output:
  *  - Fraction of inter-edges for each timestep, separated by a space.
  *  - One LF at the end of output.
- *  - Output is given for 10000 timesteps.
+ *  - Output is given for NO_OF_TIMESTEPS timesteps.
  *
  * Further Parameters:
  *  - Number of individuals, n = 1000.
