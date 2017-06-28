@@ -7,7 +7,7 @@
 
 
 void run(unsigned int k, unsigned int kOverL, double hhc) {
-		NetworKit::AffinityGenerator aGen;
+	NetworKit::AffinitiesGenerator aGen;
 
 	auto m = aGen.halfHalf(k, hhc);
 
@@ -23,15 +23,14 @@ void run(unsigned int k, unsigned int kOverL, double hhc) {
 
 	NetworKit::count intra, inter;
 
-
-	for (int i = 0; i < 10000; ++i) {
+	for (int i = 0; i < NO_OF_TIMESTEPS; ++i) {
 		NetworKit::Partition p = gen.next();
 		auto clusters = state.getClusters();
 
 		intra = 0;
 		inter = 0;
 
-		for (auto clusterIt = clusters.cbegin(); clusterIt != clusters.cend(); ++clusterIt) {
+		for (auto clusterIt = clusters.cbegin() + 1; clusterIt != clusters.cend(); ++clusterIt) {
 			for (auto it = (*clusterIt).cbegin(); it != (*clusterIt).cend(); ++it) {
 				for (auto postIt = it + 1; postIt != (*clusterIt).cend(); ++postIt) {
 					if (m.get(*it, *postIt) == 1) {
@@ -45,6 +44,11 @@ void run(unsigned int k, unsigned int kOverL, double hhc) {
 
 		std::cout << static_cast<double>(inter) / static_cast<double>(inter + intra) << " ";
 	}
+
+	#ifdef DYNAMICCOMMUNITIESGENERATOR_VALIDATOR
+	validator.validate();
+	#endif /* DYNAMICCOMMUNITIESGENERATOR_VALIDATOR */
+
 	std::cout << std::endl;
 }
 
