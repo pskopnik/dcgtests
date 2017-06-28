@@ -6,13 +6,16 @@
 #endif /* NO_OF_TIMESTEPS */
 
 /**
- * Tests the fraction clearly owned clusters.
+ * Tests the fraction of clearly owned clusters.
  *
- * That is, the fraction of clusters, which
+ * Background:
+ * The cluster affinities are based on a partition of the subclusters. Within a part, there is a
+ * higher affinity between subclusters.
+ * In case of half-half, there are only two parts.
  *
- * For every connected component in the graph of chosen edges, the number of
- * inter-edges between all pairs of nodes in the component are counted and
- * the sum is divided by the total number of edges in the component.
+ * For every cluster the distribution of subclusters in regards to their part is determined.
+ * If the largest (in terms of no. of subclusters) part owns more than 50% of the cluster,
+ * the cluster is regarded as clearly owned.
  *
  * Output:
  *  - Fraction of clearly owned clusters for each timestep, separated by a space.
