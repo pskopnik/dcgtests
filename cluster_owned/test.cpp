@@ -26,7 +26,8 @@ void run(unsigned int k, unsigned int kOverL, double hhc) {
 
 	NetworKit::count encountered, owned;
 	std::vector<NetworKit::index> inverted = invert(parts);
-	std::vector<NetworKit::count> buckets(parts.size());
+	std::vector<NetworKit::count> buckets;
+	buckets.reserve(parts.size());
 
 	for (int i = 0; i < NO_OF_TIMESTEPS; ++i) {
 		NetworKit::Partition p = gen.next();
@@ -38,8 +39,7 @@ void run(unsigned int k, unsigned int kOverL, double hhc) {
 		for (auto clusterIt = clusters.cbegin() + 1; clusterIt != clusters.cend(); ++clusterIt) {
 
 			++encountered;
-			buckets.clear();
-			buckets.resize(parts.size(), 0);
+			buckets.assign(parts.size(), 0);
 
 			for (auto it = (*clusterIt).cbegin(); it != (*clusterIt).cend(); ++it) {
 				++buckets[inverted[*it]];

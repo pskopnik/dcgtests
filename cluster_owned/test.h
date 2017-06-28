@@ -9,7 +9,7 @@
  * Tests the fraction of clearly owned clusters.
  *
  * Background:
- * The cluster affinities are based on a partition of the subclusters. Within a part, there is a
+ * The subcluster affinities are based on a partition of the subclusters. Within a part, there is a
  * higher affinity between subclusters.
  * In case of half-half, there are only two parts.
  *
