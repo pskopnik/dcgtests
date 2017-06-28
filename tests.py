@@ -90,7 +90,7 @@ def cluster_impurity(j):
 		Factory(
 			CSV,
 			file_path=Join(
-				"cluster_impurity.out.", P("k"), ".", P("k_over_l"), ".", P("hhc"), ".csv"
+				"cluster_impurity.out.", P("k"), ".", P("k_over_l"), ".", P("hhc"), ".tsv"
 			),
 			input_csv_args=dict(delimiter=' '),
 			output_csv_args=dict(delimiter=' '),
@@ -130,7 +130,7 @@ def cluster_owned(j):
 		Factory(
 			Concatenate,
 			file_path=Join(
-				"cluster_owned.out.", P("k"), ".", P("k_over_l"), ".", P("hhc"), ".csv"
+				"cluster_owned.out.", P("k"), ".", P("k_over_l"), ".", P("hhc"), ".tsv"
 			),
 		)
 	))
@@ -168,7 +168,7 @@ def cluster_size(j):
 		Factory(
 			CSV,
 			file_path=Join(
-				"cluster_size.out.", P("k"), ".", P("k_over_l"), ".", P("hhc"), ".csv"
+				"cluster_size.out.", P("k"), ".", P("k_over_l"), ".", P("hhc"), ".tsv"
 			),
 			input_csv_args=dict(delimiter=' '),
 			output_csv_args=dict(delimiter=' '),
@@ -208,7 +208,7 @@ def interedges_cc(j):
 		Factory(
 			Concatenate,
 			file_path=Join(
-				"interedges_cc.out.", P("k"), ".", P("k_over_l"), ".", P("hhc"), ".csv"
+				"interedges_cc.out.", P("k"), ".", P("k_over_l"), ".", P("hhc"), ".tsv"
 			),
 		)
 	))
@@ -246,7 +246,7 @@ def interedges_forest(j):
 		Factory(
 			Concatenate,
 			file_path=Join(
-				"interedges_forest.out.", P("k"), ".", P("k_over_l"), ".", P("hhc"), ".csv"
+				"interedges_forest.out.", P("k"), ".", P("k_over_l"), ".", P("hhc"), ".tsv"
 			),
 		)
 	))
@@ -285,7 +285,7 @@ def subcluster_individuals(j):
 		Factory(
 			CSV,
 			file_path=Join(
-				"out.", P("k"), ".", P("n"), ".", P("alpha"), ".", P("p_move_v"), ".csv"
+				"subcluster_individuals.out.", P("k"), ".", P("n"), ".", P("alpha"), ".", P("p_move_v"), ".tsv"
 			),
 			input_csv_args=dict(delimiter=' '),
 			output_csv_args=dict(delimiter=' '),
