@@ -5,7 +5,7 @@ CC=gcc
 CXX=g++
 RM=rm -f
 
-CPPFLAGS = -std=c++11 -Wall -g -O3 $(shell pkg-config --cflags NetworKit)
+CPPFLAGS = -std=c++11 -Wall -g -O3 $(shell pkg-config --cflags NetworKit) -fopenmp
 LDFLAGS  = -g -O3 -Wall
 LDLIBS   = $(shell pkg-config --libs NetworKit) -fopenmp
 
