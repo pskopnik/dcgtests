@@ -1,4 +1,5 @@
 from bjec import job, build, P, Factory, Join
+from bjec.params import Function
 from bjec.build import GitRepo, Make
 from bjec.runner import SubprocessRunner, ProcessArgs, Stdout
 from bjec.processor import Threading
@@ -81,7 +82,7 @@ def cluster_impurity(j):
 
 	j.runner(SubprocessRunner.factory(
 		j.dependencies[build_cluster_impurity].artefacts["executable"],
-		input=ProcessArgs(P("k"), P("k_over_l"), P("hhc")),
+		input=ProcessArgs(P("k"), Function(lambda p: p["k"] // p["k_over_l"]), P("hhc")),
 		output=Stdout(),
 	))
 
@@ -121,7 +122,7 @@ def cluster_owned(j):
 
 	j.runner(SubprocessRunner.factory(
 		j.dependencies[build_cluster_owned].artefacts["executable"],
-		input=ProcessArgs(P("k"), P("k_over_l"), P("hhc")),
+		input=ProcessArgs(P("k"), Function(lambda p: p["k"] // p["k_over_l"]), P("hhc")),
 		output=Stdout(),
 	))
 
@@ -159,7 +160,7 @@ def cluster_size(j):
 
 	j.runner(SubprocessRunner.factory(
 		j.dependencies[build_cluster_size].artefacts["executable"],
-		input=ProcessArgs(P("k"), P("k_over_l"), P("hhc")),
+		input=ProcessArgs(P("k"), Function(lambda p: p["k"] // p["k_over_l"]), P("hhc")),
 		output=Stdout(),
 	))
 
@@ -199,7 +200,7 @@ def interedges_cc(j):
 
 	j.runner(SubprocessRunner.factory(
 		j.dependencies[build_interedges_cc].artefacts["executable"],
-		input=ProcessArgs(P("k"), P("k_over_l"), P("hhc")),
+		input=ProcessArgs(P("k"), Function(lambda p: p["k"] // p["k_over_l"]), P("hhc")),
 		output=Stdout(),
 	))
 
@@ -237,7 +238,7 @@ def interedges_forest(j):
 
 	j.runner(SubprocessRunner.factory(
 		j.dependencies[build_interedges_forest].artefacts["executable"],
-		input=ProcessArgs(P("k"), P("k_over_l"), P("hhc")),
+		input=ProcessArgs(P("k"), Function(lambda p: p["k"] // p["k_over_l"]), P("hhc")),
 		output=Stdout(),
 	))
 
@@ -296,4 +297,3 @@ def subcluster_individuals(j):
 
 	j.after(lambda j: print("Wrote results to", list(map(lambda f: f.name, j.artefacts["result"]))))
 	j.after(lambda j: list(map(lambda f: f.close(), j.artefacts["result"])))
-

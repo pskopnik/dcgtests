@@ -6,7 +6,7 @@
 #endif /* NO_OF_TIMESTEPS */
 
 /**
- * Tests the number of individuals for each subcluster.
+ * Tests the number of individuals of each subcluster.
  *
  * Output:
  *  - For each timestep: The number of individuals for each subcluster, separated by a space.

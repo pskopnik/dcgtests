@@ -8,13 +8,13 @@
 #include <NetworKit/structures/Partition.h>
 
 
-void run(unsigned int k, unsigned int kOverL, double hhc) {
+void run(unsigned int k, unsigned int l, double hhc) {
 	std::vector<std::vector<NetworKit::index>> parts;
 	NetworKit::AffinitiesGenerator aGen;
 
 	auto m = aGen.halfHalf(k, hhc, parts);
 
-	NetworKit::DynamicCommunitiesGenerator::Parameters parameters{m, k / kOverL, 1000, 0.5, 0.1};
+	NetworKit::DynamicCommunitiesGenerator::Parameters parameters{m, l, 1000, 0.5, 0.1};
 
 	NetworKit::DynamicCommunitiesGenerator gen(parameters);
 	NetworKit::GeneratorState state(gen);
@@ -64,7 +64,7 @@ void run(unsigned int k, unsigned int kOverL, double hhc) {
 }
 
 int main(int argc, char const *argv[]) {
-	unsigned int k, kOverL;
+	unsigned int k, l;
 	double hhc;
 
 	if (argc != 4) {
@@ -83,8 +83,8 @@ int main(int argc, char const *argv[]) {
 
 	ss.str(std::string(argv[2]));
 	ss.clear();
-	if (!(ss >> kOverL)) {
-		std::cerr << "Invalid value for kOverL (expected int): " << argv[2] << std::endl;
+	if (!(ss >> l)) {
+		std::cerr << "Invalid value for l (expected int): " << argv[2] << std::endl;
 		return 1;
 	}
 
@@ -95,7 +95,7 @@ int main(int argc, char const *argv[]) {
 		return 1;
 	}
 
-	run(k, kOverL, hhc);
+	run(k, l, hhc);
 
 	return 0;
 }

@@ -28,9 +28,9 @@
  *  - Probability of subcluster change of an individual, p_move_v = 0.1.
  *
  * @param k Number of subclusters.
- * @param kOverL The value of k/l, l is set from this and k: l := k / kOverL
+ * @param l The value of l.
  * @param hhc Half-half coefficient. Passed to the AffinitiesGenerator.
  */
-void run(unsigned int k, unsigned int kOverL, double hhc);
+void run(unsigned int k, unsigned int l, double hhc);
 
 #endif /* CLUSTER_OWNED_H_ */
