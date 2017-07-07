@@ -3,7 +3,7 @@ from bjec.params import Function
 from bjec.build import GitRepo, Make
 from bjec.runner import SubprocessRunner, ProcessArgs, Stdout
 from bjec.processor import Threading
-from bjec.generator import Product, RepeatG
+from bjec.generator import Product, RepeatG, List
 from bjec.collector import Concatenate, CSV, Demux
 from bjec.config import config
 
@@ -23,10 +23,10 @@ def build_cluster_impurity(b):
 	b.artefact(executable=m.result)
 
 @build()
-def build_cluster_owned(b):
+def build_clusters_owned(b):
 	s = b.source(GitRepo(repo_url))
 
-	m = b.builder(Make(join(s.local_path(), "cluster_owned"), creates="test"))
+	m = b.builder(Make(join(s.local_path(), "clusters_owned"), creates="test"))
 
 	b.artefact(executable=m.result)
 
@@ -68,8 +68,10 @@ def cluster_impurity(j):
 	j.generator(
 		RepeatG(
 			Product(
-				k=[30, 100, 500, 1000],
-				k_over_l=[3, 5, 10, 20],
+				# k=[30, 100, 500, 1000],
+				k=[500],
+				# k_over_l=[3, 5, 10, 20],
+				k_over_l=[20],
 				hhc=[0.1, 0.3, 0.5, 0.7, 0.9],
 			),
 			100,
@@ -103,13 +105,15 @@ def cluster_impurity(j):
 	j.after(lambda j: print("Wrote results to", list(map(lambda f: f.name, j.artefacts["result"]))))
 	j.after(lambda j: list(map(lambda f: f.close(), j.artefacts["result"])))
 
-@job(depends=build_cluster_owned)
-def cluster_owned(j):
+@job(depends=build_clusters_owned)
+def clusters_owned(j):
 	j.generator(
 		RepeatG(
 			Product(
-				k=[30, 100, 500, 1000],
-				k_over_l=[3, 5, 10, 20],
+				# k=[30, 100, 500, 1000],
+				k=[500],
+				# k_over_l=[3, 5, 10, 20],
+				k_over_l=[20],
 				hhc=[0.1, 0.3, 0.5, 0.7, 0.9],
 			),
 			100,
@@ -121,7 +125,7 @@ def cluster_owned(j):
 	))
 
 	j.runner(SubprocessRunner.factory(
-		j.dependencies[build_cluster_owned].artefacts["executable"],
+		j.dependencies[build_clusters_owned].artefacts["executable"],
 		input=ProcessArgs(P("k"), Function(lambda p: p["k"] // p["k_over_l"]), P("hhc")),
 		output=Stdout(),
 	))
@@ -131,7 +135,7 @@ def cluster_owned(j):
 		Factory(
 			Concatenate,
 			file_path=Join(
-				"cluster_owned.out.", P("k"), ".", P("k_over_l"), ".", P("hhc"), ".tsv"
+				"clusters_owned.out.", P("k"), ".", P("k_over_l"), ".", P("hhc"), ".tsv"
 			),
 		)
 	))
@@ -146,8 +150,10 @@ def cluster_size(j):
 	j.generator(
 		RepeatG(
 			Product(
-				k=[30, 100, 500, 1000],
-				k_over_l=[3, 5, 10, 20],
+				# k=[30, 100, 500, 1000],
+				k=[500],
+				# k_over_l=[3, 5, 10, 20],
+				k_over_l=[20],
 				hhc=[0.1, 0.3, 0.5, 0.7, 0.9],
 			),
 			100,
@@ -186,8 +192,10 @@ def interedges_cc(j):
 	j.generator(
 		RepeatG(
 			Product(
-				k=[30, 100, 500, 1000],
-				k_over_l=[3, 5, 10, 20],
+				# k=[30, 100, 500, 1000],
+				k=[500],
+				# k_over_l=[3, 5, 10, 20],
+				k_over_l=[20],
 				hhc=[0.1, 0.3, 0.5, 0.7, 0.9],
 			),
 			100,
@@ -224,8 +232,10 @@ def interedges_forest(j):
 	j.generator(
 		RepeatG(
 			Product(
-				k=[30, 100, 500, 1000],
-				k_over_l=[3, 5, 10, 20],
+				# k=[30, 100, 500, 1000],
+				k=[500],
+				# k_over_l=[3, 5, 10, 20],
+				k_over_l=[20],
 				hhc=[0.1, 0.3, 0.5, 0.7, 0.9],
 			),
 			100,
@@ -262,8 +272,10 @@ def subcluster_individuals(j):
 	j.generator(
 		RepeatG(
 			Product(
-				k=[30, 100, 500, 1000],
-				n=[500, 1000, 2000, 5000],
+				# k=[30, 100, 500, 1000],
+				k=[500],
+				# n=[500, 1000, 2000, 5000],
+				n=[5000],
 				alpha=[0.1, 0.3, 0.5, 0.7, 0.9],
 				p_move_v=[0.1, 0.4, 0.6, 0.9],
 			),
