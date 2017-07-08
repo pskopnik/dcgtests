@@ -12,6 +12,7 @@ import os
 
 
 repo_url = config.User["repo_url"]
+no_of_runs = config.User.get("no_of_runs", 100)
 
 
 @build()
@@ -74,7 +75,7 @@ def cluster_impurity(j):
 				k_over_l=[20],
 				hhc=[0.1, 0.3, 0.5, 0.7, 0.9],
 			),
-			100,
+			no_of_runs,
 		)
 	)
 
@@ -116,7 +117,7 @@ def clusters_owned(j):
 				k_over_l=[20],
 				hhc=[0.1, 0.3, 0.5, 0.7, 0.9],
 			),
-			100,
+			no_of_runs,
 		)
 	)
 
@@ -156,7 +157,7 @@ def cluster_size(j):
 				k_over_l=[20],
 				hhc=[0.1, 0.3, 0.5, 0.7, 0.9],
 			),
-			100,
+			no_of_runs,
 		)
 	)
 
@@ -198,7 +199,7 @@ def interedges_cc(j):
 				k_over_l=[20],
 				hhc=[0.1, 0.3, 0.5, 0.7, 0.9],
 			),
-			100,
+			no_of_runs,
 		)
 	)
 
@@ -238,7 +239,7 @@ def interedges_forest(j):
 				k_over_l=[20],
 				hhc=[0.1, 0.3, 0.5, 0.7, 0.9],
 			),
-			100,
+			no_of_runs,
 		)
 	)
 
@@ -279,7 +280,7 @@ def subcluster_individuals(j):
 				alpha=[0.1, 0.3, 0.5, 0.7, 0.9],
 				p_move_v=[0.1, 0.4, 0.6, 0.9],
 			),
-			100,
+			no_of_runs,
 		)
 	)
 
