@@ -294,7 +294,7 @@ def subcluster_individuals(j):
 	))
 
 	coll = j.collector(Demux(
-		["k", "n", "alpha"],
+		["k", "n", "alpha", "p_move_v"],
 		Factory(
 			CSV,
 			file_path=Join(
