@@ -24,4 +24,4 @@ time bjec run -c conf.yaml tests.py subcluster_individuals
 mkdir -p subcluster_individuals
 mv subcluster_individuals.* subcluster_individuals
 
-time tar -cjf results.tar.bz2 cluster_impurity cluster_size clusters_owned interedges_cc interedges_forest subcluster_individuals
+time zip -r results.zip cluster_impurity cluster_size clusters_owned interedges_cc interedges_forest subcluster_individuals
