@@ -105,7 +105,7 @@ plot(
 	),
 	t='n',
 	xaxt='n',
-	main="Mean and Median of Cluster Size for Each Cluster Index",
+	main="Mean and Median of Cluster Impurities for Each Cluster Index",
 	sub="Mean and median are aggregated for each cluster index over cluster impurities of all timesteps and runs",
 	xlab="Cluster Index",
 	ylab="Cluster Impurity"
