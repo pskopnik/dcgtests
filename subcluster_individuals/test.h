@@ -1,5 +1,5 @@
-#ifndef CLUSTER_OWNED_H_
-#define CLUSTER_OWNED_H_
+#ifndef SUBCLUSTER_INDIVIDUALS_H_
+#define SUBCLUSTER_INDIVIDUALS_H_
 
 #ifndef NO_OF_TIMESTEPS
 #define NO_OF_TIMESTEPS 5000
@@ -26,4 +26,4 @@
  */
 void run(unsigned int k, unsigned int n, double alpha, double pMoveV);
 
-#endif /* CLUSTER_OWNED_H_ */
+#endif /* SUBCLUSTER_INDIVIDUALS_H_ */

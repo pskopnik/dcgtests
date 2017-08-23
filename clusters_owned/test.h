@@ -1,5 +1,5 @@
-#ifndef CLUSTER_OWNED_H_
-#define CLUSTER_OWNED_H_
+#ifndef CLUSTERS_OWNED_H_
+#define CLUSTERS_OWNED_H_
 
 #ifndef NO_OF_TIMESTEPS
 #define NO_OF_TIMESTEPS 5000
@@ -33,4 +33,4 @@
  */
 void run(unsigned int k, unsigned int l, double hhc);
 
-#endif /* CLUSTER_OWNED_H_ */
+#endif /* CLUSTERS_OWNED_H_ */
