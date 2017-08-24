@@ -6,12 +6,12 @@
 #include <NetworKit/structures/Partition.h>
 
 
-void run(unsigned int k, unsigned int n, double alpha, double pMoveV) {
+void run(unsigned int k, unsigned int n, double alphaV) {
 	NetworKit::AffinitiesGenerator aGen;
 
 	auto m = aGen.halfHalf(k, 0.3);
 
-	NetworKit::DynamicCommunitiesGenerator::Parameters parameters{m, k / 10, n, alpha, pMoveV};
+	NetworKit::DynamicCommunitiesGenerator::Parameters parameters{m, k / 10, n, alphaV};
 
 	NetworKit::DynamicCommunitiesGenerator gen(parameters);
 	NetworKit::GeneratorState state(gen);
@@ -46,10 +46,10 @@ void run(unsigned int k, unsigned int n, double alpha, double pMoveV) {
 
 int main(int argc, char const *argv[]) {
 	unsigned int k, n;
-	double alpha, pMoveV;
+	double alphaV;
 
-	if (argc != 5) {
-		std::cerr << "Invalid number of arguments passed (expected 4): " << argc - 1 << std::endl;
+	if (argc != 4) {
+		std::cerr << "Invalid number of arguments passed (expected 3): " << argc - 1 << std::endl;
 		return 1;
 	}
 
@@ -71,19 +71,12 @@ int main(int argc, char const *argv[]) {
 
 	ss.str(std::string(argv[3]));
 	ss.clear();
-	if (!(ss >> alpha)) {
-		std::cerr << "Invalid value for alpha (expected double): " << argv[3] << std::endl;
+	if (!(ss >> alphaV)) {
+		std::cerr << "Invalid value for alphaV (expected double): " << argv[3] << std::endl;
 		return 1;
 	}
 
-	ss.str(std::string(argv[4]));
-	ss.clear();
-	if (!(ss >> pMoveV)) {
-		std::cerr << "Invalid value for pMoveV (expected double): " << argv[4] << std::endl;
-		return 1;
-	}
-
-	run(k, n, alpha, pMoveV);
+	run(k, n, alphaV);
 
 	return 0;
 }

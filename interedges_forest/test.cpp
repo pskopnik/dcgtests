@@ -11,7 +11,7 @@ void run(unsigned int k, unsigned int l, double hhc) {
 
 	auto m = aGen.halfHalf(k, hhc);
 
-	NetworKit::DynamicCommunitiesGenerator::Parameters parameters{m, l, 1000, 0.5, 0.1};
+	NetworKit::DynamicCommunitiesGenerator::Parameters parameters{m, l, 1000, 0.95};
 
 	NetworKit::DynamicCommunitiesGenerator gen(parameters);
 	NetworKit::GeneratorState state(gen);

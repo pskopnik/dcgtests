@@ -25,8 +25,7 @@
  *
  * Further Parameters:
  *  - Number of individuals, n = 1000.
- *  - Home subcluster affinity, alpha = 0.5.
- *  - Probability of subcluster change of an individual, p_move_v = 0.1.
+ *  - Individual home subcluster affinity, alpha_v = 0.95.
  *
  * @param k Number of subclusters.
  * @param l The value of l.

@@ -21,9 +21,8 @@
  *
  * @param k Number of subclusters.
  * @param n Number of individuals.
- * @param alpha Home subcluster affinity.
- * @param pMoveV Probability of subcluster change of an individual.
+ * @param alphaV Individual home subcluster affinity.
  */
-void run(unsigned int k, unsigned int n, double alpha, double pMoveV);
+void run(unsigned int k, unsigned int n, double alphaV);
 
 #endif /* SUBCLUSTER_INDIVIDUALS_H_ */
