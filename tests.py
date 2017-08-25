@@ -40,6 +40,14 @@ def build_cluster_size(b):
 	b.artefact(executable=m.result)
 
 @build()
+def build_individuals_location(b):
+	s = b.source(GitRepo(repo_url))
+
+	m = b.builder(Make(join(s.local_path(), "individuals_location"), creates="test"))
+
+	b.artefact(executable=m.result)
+
+@build()
 def build_interedges_cc(b):
 	s = b.source(GitRepo(repo_url))
 
@@ -188,6 +196,42 @@ def cluster_size(j):
 	j.after(lambda j: print("Wrote results to", list(map(lambda f: f.name, j.artefacts["result"]))))
 	j.after(lambda j: list(map(lambda f: f.close(), j.artefacts["result"])))
 
+@job(depends=build_individuals_location)
+def individuals_location(j):
+	j.generator(
+		RepeatG(
+			Product(
+				alpha_v=[0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 0.99]
+			),
+			no_of_runs,
+		)
+	)
+
+	j.processor(Threading(
+		config.User.get("cpu_count", os.cpu_count())
+	))
+
+	j.runner(SubprocessRunner.factory(
+		j.dependencies[build_individuals_location].artefacts["executable"],
+		input=ProcessArgs(P("alpha_v")),
+		output=Stdout(),
+	))
+
+	coll = j.collector(Demux(
+		["alpha_v"],
+		Factory(
+			Concatenate,
+			file_path=Join(
+				"individuals_location.out.", P("alpha_v"), ".tsv"
+			),
+		)
+	))
+
+	j.artefact(result=coll.aggregate)
+
+	j.after(lambda j: print("Wrote results to", list(map(lambda f: f.name, j.artefacts["result"]))))
+	j.after(lambda j: list(map(lambda f: f.close(), j.artefacts["result"])))
+
 @job(depends=build_interedges_cc)
 def interedges_cc(j):
 	j.generator(
@@ -277,8 +321,7 @@ def subcluster_individuals(j):
 				k=[500],
 				# n=[500, 1000, 2000, 5000],
 				n=[5000],
-				alpha=[0.1, 0.3, 0.5, 0.7, 0.9],
-				p_move_v=[0.1, 0.4, 0.6, 0.9],
+				alpha_v=[0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 0.99]
 			),
 			no_of_runs,
 		)
@@ -290,16 +333,16 @@ def subcluster_individuals(j):
 
 	j.runner(SubprocessRunner.factory(
 		j.dependencies[build_subcluster_individuals].artefacts["executable"],
-		input=ProcessArgs(P("k"), P("n"), P("alpha"), P("p_move_v")),
+		input=ProcessArgs(P("k"), P("n"), P("alpha_v")),
 		output=Stdout(),
 	))
 
 	coll = j.collector(Demux(
-		["k", "n", "alpha", "p_move_v"],
+		["k", "n", "alpha_v"],
 		Factory(
 			CSV,
 			file_path=Join(
-				"subcluster_individuals.out.", P("k"), ".", P("n"), ".", P("alpha"), ".", P("p_move_v"), ".tsv"
+				"subcluster_individuals.out.", P("k"), ".", P("n"), ".", P("alpha_v"), ".tsv"
 			),
 			input_csv_args=dict(delimiter=' '),
 			output_csv_args=dict(delimiter=' '),
