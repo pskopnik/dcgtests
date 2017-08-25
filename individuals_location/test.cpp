@@ -9,9 +9,9 @@
 void run(double alphaV) {
 	NetworKit::AffinitiesGenerator aGen;
 
-	auto m = aGen.halfHalf(30, 0.3);
+	auto m = aGen.halfHalf(PARAM_K, PARAM_HHC);
 
-	NetworKit::DynamicCommunitiesGenerator::Parameters parameters{m, 6, PARAM_N, alphaV};
+	NetworKit::DynamicCommunitiesGenerator::Parameters parameters{m, PARAM_L, PARAM_N, alphaV};
 
 	NetworKit::DynamicCommunitiesGenerator gen(parameters);
 	NetworKit::GeneratorState state(gen);

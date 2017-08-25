@@ -5,6 +5,9 @@
 #define NO_OF_TIMESTEPS 5000
 #endif /* NO_OF_TIMESTEPS */
 
+#define PARAM_HHC 0.3
+#define PARAM_K 30
+#define PARAM_L 5
 #define PARAM_N 1000
 
 /**
@@ -17,10 +20,10 @@
  *  - Output is given for NO_OF_TIMESTEPS timesteps.
  *
  * Further Parameters:
- *  - The value of k/l, k/l = 6. l is set from this and k: l := k / kOverL
  *  - Half-half coefficient, hhc = 0.3. Passed to the AffinitiesGenerator halfHalf method.
- *  - Number of individuals, n = 1000.
  *  - Number of subclusters, k = 30.
+ *  - The number of clusters, l = 5
+ *  - Number of individuals, n = 1000.
  *
  * @param alphaV Individual home subcluster affinity.
  */
