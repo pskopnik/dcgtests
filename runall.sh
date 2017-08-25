@@ -12,6 +12,10 @@ time bjec run -c conf.yaml tests.py clusters_owned
 mkdir -p clusters_owned
 mv clusters_owned.* clusters_owned
 
+time bjec run -c conf.yaml tests.py individuals_location
+mkdir -p individuals_location
+mv individuals_location.* individuals_location
+
 time bjec run -c conf.yaml tests.py interedges_cc
 mkdir -p interedges_cc
 mv interedges_cc.* interedges_cc
@@ -24,4 +28,4 @@ time bjec run -c conf.yaml tests.py subcluster_individuals
 mkdir -p subcluster_individuals
 mv subcluster_individuals.* subcluster_individuals
 
-time zip -r results.zip cluster_impurity cluster_size clusters_owned interedges_cc interedges_forest subcluster_individuals
+time zip -r results.zip cluster_impurity cluster_size clusters_owned individuals_location interedges_cc interedges_forest subcluster_individuals
